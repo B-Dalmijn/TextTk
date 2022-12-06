@@ -8,7 +8,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 setup(
 	name="texttk",
 	version="0.1.0",
-	description="Text editor written in Tkinter"
+	description="Text editor written in Tkinter",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
 	url="https://github.com/B-Dalmijn/TextTk",
@@ -59,6 +59,6 @@ setup(
 	],
 	python_requires='>=3.6',
 	package_data={
-	"texttk": ["resources\\logo.png","resources\\logo.ico"],
+	"texttk": ["resources\\icon.png","resources\\icon.ico"],
 	}
 	)
