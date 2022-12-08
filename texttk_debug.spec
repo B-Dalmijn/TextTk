@@ -19,7 +19,7 @@ a = Analysis(
     ['src/texttk/main.py'],
     pathex=[f"{__here__}\\src\\texttk", dlls],
     binaries=[],
-    datas=[],
+    datas=[("src/texttk/resources","resources")],
     hiddenimports=[],
     hookspath=[],
     runtime_hooks=[],
