@@ -3,7 +3,7 @@
 ## Disclaimer
 This was made out of boredom. It is not serious in any way as actual software.
 This library/repository is meant as an example of how one could make an application
-using tkinter (Tk for Python) and freeze is as a standalone application.
+using tkinter (Tk for Python) and freeze it as a standalone application.
 If you unironically mean to use this as an actual texteditor, seek help...
 
 ## What does it have?
