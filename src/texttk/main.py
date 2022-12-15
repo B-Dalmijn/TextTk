@@ -69,7 +69,7 @@ class texttk(Tk):
         text._text.bind("<<Modified>>", self._modified, True)
         self._tabs.add(text,text=name)
         self._tabs.select(text)
-        self._files[file] = {"State":0,"Name":name,"Text":text}
+        self._files[file] = {"State":2,"Name":name,"Text":text}
             
     def _new(self):
         self._cur = f"Untitled {self._untitled}.txt"

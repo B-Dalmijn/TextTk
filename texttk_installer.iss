@@ -5,6 +5,7 @@
 #define MyAppVersion "0.1.0"
 #define MyAppPublisher "Brendan Wybo Dalmijn"
 #define MyAppExeName "TextTk.exe"
+#define PathToSelf ExtractFileDir(SourcePath)
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -18,8 +19,8 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-OutputDir={#}
-OutputBaseFilename={#MyAppName} v{#MyAppVersion} Setup
+OutputDir="{#PathToSelf}"
+OutputBaseFilename={#MyAppName}-{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 
@@ -31,8 +32,8 @@ Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "{}\dist\TextTk\TextTk.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{}\dist\TextTk\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#PathToSelf}\dist\TextTk\TextTk.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#PathToSelf}\dist\TextTk\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

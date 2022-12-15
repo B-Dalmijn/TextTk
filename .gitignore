@@ -20,3 +20,6 @@ tmp/
 # Files from building
 build/
 dist/
+
+# Installers
+*.exe
