@@ -69,7 +69,7 @@ class texttk(Tk):
         text._text.bind("<<Modified>>", self._modified, True)
         self._tabs.add(text,text=name)
         self._tabs.select(text)
-        self._files[file] = {"State":2,"Name":name,"Text":text}
+        self._files[file] = {"State":[True,False],"Name":name,"Text":text}
             
     def _new(self):
         self._cur = f"Untitled {self._untitled}.txt"
@@ -78,7 +78,7 @@ class texttk(Tk):
         
     def _open_from_file(self,file):
         self._add(file)
-        self._files[file]["State"] = 2
+        self._files[file]["State"] = [False,False]
         self._files[file]["Name"] = os.path.basename(file)
         self._files[file]["Text"].insert("1.0",self._read_file(file))
         self._files[file]["Text"]._text.edit_modified(False)        
@@ -99,7 +99,9 @@ class texttk(Tk):
         return read
     
     def _save(self):
-        if self._files[self._cur]["State"] == 0:
+        if not self._files[self._cur]["State"][1]:
+            return
+        if self._files[self._cur]["State"][0]:
             return self._save_as()
         else:
             return self._save_file(self._cur)
@@ -112,7 +114,7 @@ class texttk(Tk):
                                             defaultextension=exts[0])
         if file:
             self._files[file] = self._files.pop(self._cur)
-            self._files[file]["State"] = 2
+            self._files[file]["State"] = [False, False]
             self._files[file]["Name"] = os.path.basename(file)
             self._tabs.tab(self._index,text=os.path.basename(file))
             self._tabs.winfo_children()[self._index].uid = file
@@ -131,7 +133,7 @@ class texttk(Tk):
     
     def _closing(self,event):
         self._cur = self._tabs.winfo_children()[event.x].uid
-        if self._files[self._cur]["State"] != 2:
+        if self._files[self._cur]["State"][1]:
             name = os.path.basename(self._cur)
             awnser = messagebox.askyesno("Save",f"Save: {name}? If not, changes will be lost.",default='yes')
             if awnser:
@@ -157,21 +159,17 @@ class texttk(Tk):
         if flag:
             self.event_generate("<<DocModified>>")
         else:
-            if self._files[self._cur]["State"] == 0:
-                self._tabs.tab(self._index, text = self._files[self._cur]["Name"])
-            else:
-                self.event_generate("<<DocSaved>>")
+            self.event_generate("<<DocSaved>>")
 
     def _modified_state(self):
         name = self._files[self._cur]["Name"]
-        if not self._files[self._cur]["State"] == 0:
-            self._files[self._cur]["State"] = 1
+        self._files[self._cur]["State"][1] = True
         self._tabs.tab(self._index, text = name + "*")
 
     def _saved_state(self):
         self._files[self._cur]["Text"]._text.edit_modified(False)
         name = self._files[self._cur]["Name"]
-        self._files[self._cur]["State"] = 2
+        self._files[self._cur]["State"][1] = False
         self._tabs.tab(self._index, text = name)
 
     def _tab_id(self,event=None):
