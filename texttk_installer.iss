@@ -28,6 +28,10 @@ SolidCompression=yes
 Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
 
+[Setup]
+LicenseFile="{#PathToSelf}\LICENSE"
+ArchitecturesInstallIn64BitMode=x64
+
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
